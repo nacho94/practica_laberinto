@@ -1,6 +1,7 @@
 
 
 import java.util.Random;
+import java.util.ArrayList;
 
 class point {
 	private int x;
@@ -62,9 +63,39 @@ public class laberinto {
 		}
 	}
 
-	public static void buscarVecinas(int [][] a, int x, int y) {
+	public static ArrayList <point> buscarVecinas(int [][] a, int x, int y, int xA,int yA) {
 
+		ArrayList <point> vecinos = new ArrayList <point>();
 
+		int length = a.length;
+
+		if (y-1 != yA && y-1 >= 0 && a[x][y-1] == 0 ) {
+			vecinos.add(new point(x,y-1));
+		}
+		if (x+1 != xA && y-1 != yA && x+1 <length && y-1 >=0 && a[x+1][y-1] == 0) {
+			vecinos.add(new point(x+1,y-1));
+		}
+		if (x+1 != xA && x+1 <length && a[x+1][y] == 0) {
+			vecinos.add(new point(x+1,y));
+		}
+		if (x+1 != xA && y+1 != yA && x+1 <length && y+1 <length && a[x+1][y+1] == 0) {
+			vecinos.add(new point(x+1,y+1));
+		}
+		if (y+1 != yA && y+1 <length && a[x][y+1] == 0) {
+			vecinos.add(new point(x,y+1));
+		}
+		if (x-1 != xA && y+1 != yA && x-1 >=0 && y+1 <length && a[x-1][y+1] == 0) {
+			vecinos.add(new point(x-1,y+1));
+		}
+		if (x-1 != xA && x-1 >=0 && a[x-1][y] == 0) {
+			vecinos.add(new point(x-1,y));
+		}
+		if (x-1 != xA && y-1 != yA && x-1 >=0 && y-1 >= 0 && a[x-1][y-1] == 0) {
+			vecinos.add(new point(x-1,y-1));
+		}
+
+		return vecinos;
 
 	}
+
 }
