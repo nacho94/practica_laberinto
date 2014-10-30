@@ -29,6 +29,8 @@ public class laberinto {
 
 		int [][] b = pedirEntrada();
 		print(b);
+		ArrayList <point> vecinos = buscarVecinas(b,0,0,-1,-1);
+		avanzar();
 	}
 
 	public static int [][] pedirEntrada () {
@@ -96,6 +98,13 @@ public class laberinto {
 
 		return vecinos;
 
+	}
+
+	public static boolean avanzar(int [][] a,int x,int y,ArrayList <point> vecinos) {
+
+		for(point p : vecinos) {
+			avanzar(a,p.getX(),p.getY());
+		}
 	}
 
 }
