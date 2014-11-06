@@ -28,6 +28,9 @@ class point {
 
 public class laberinto {
 
+	private static boolean premio = false;
+	private static boolean solucion = false;
+	
 
 	public static void main (String [] args) {
 		
@@ -36,9 +39,15 @@ public class laberinto {
 		char [][] b = pedirEntrada();
 		print(b);
 		ArrayList <point> vecinos = buscarVecinas(b,0,0,-2,-2);
-		imprimirpuntos(vecinos);
-		if(avanzar(b,0,0,vecinos)) {
-			System.out.println("SI");
+		avanzar(b,0,0,vecinos);
+		if(solucion) {
+			if(premio) {
+				System.out.println("SI, CON PREMIO");
+
+			}else {
+				System.out.println("SI, SIN PREMIO");
+			}
+			
 		}else {
 			System.out.println("NO");
 		}
@@ -101,29 +110,29 @@ public class laberinto {
 
 		int length = a.length;
 
-		if (y-1 != yA && y-1 >= 0 && a[x][y-1] == 0 ) {
-			vecinos.add(new point(x,y-1));
+		if (y-1 != yA && y-1 >= 0 && (a[x][y-1] == 0 || a[x][y-1] == '*')) {
+			anyadirpunto(vecinos, x,y-1,a);
 		}
 		if (x+1 != xA && y-1 != yA && x+1 <length && y-1 >=0 && a[x+1][y-1] == 0) {
-			vecinos.add(new point(x+1,y-1));
+			anyadirpunto(vecinos, x+1,y-1,a);
 		}
 		if (x+1 != xA && x+1 <length && a[x+1][y] == 0) {
-			vecinos.add(new point(x+1,y));
+			anyadirpunto(vecinos, x+1,y,a);
 		}
 		if (x+1 != xA && y+1 != yA && x+1 <length && y+1 <length && a[x+1][y+1] == 0) {
-			vecinos.add(new point(x+1,y+1));
+			anyadirpunto(vecinos, x+1,y+1,a);
 		}
 		if (y+1 != yA && y+1 <length && a[x][y+1] == 0) {
-			vecinos.add(new point(x,y+1));
+			anyadirpunto(vecinos, x,y+1,a);
 		}
 		if (x-1 != xA && y+1 != yA && x-1 >=0 && y+1 <length && a[x-1][y+1] == 0) {
-			vecinos.add(new point(x-1,y+1));
+			anyadirpunto(vecinos, x-1,y+1,a);
 		}
 		if (x-1 != xA && x-1 >=0 && a[x-1][y] == 0) {
-			vecinos.add(new point(x-1,y));
+			anyadirpunto(vecinos, x-1,y,a);
 		}
 		if (x-1 != xA && y-1 != yA && x-1 >=0 && y-1 >= 0 && a[x-1][y-1] == 0) {
-			vecinos.add(new point(x-1,y-1));
+			anyadirpunto(vecinos, x-1,y-1,a);
 		}
 		imprimirpuntos(vecinos);
 		return vecinos;
@@ -137,18 +146,24 @@ public class laberinto {
 		int n = a.length;
 
 		if(x==n-1 && y==n-1) {
+			solucion = true;
 			return true;
 		}
 
 		for(point p : vecinos) {
 			boolean r = avanzar(a,p.getX(),p.getY(),buscarVecinas(a,p.getX(),p.getY(),x,y));
-			if(r) {
+			/*if(r) {
 				return true;
-			}
+			}*/
 		}
 		return false;
 	}
-
+	public static void anyadirpunto(ArrayList <point> a,int x,int y,char [][] caracter) {
+		a.add(new point(x,y));
+		if(caracter[x][y]=='*') {
+			premio = true;
+		}
+	}
 	private static void d(String msj) {
 		System.out.println(msj);
 	}
