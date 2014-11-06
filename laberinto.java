@@ -2,6 +2,7 @@
 
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 class point {
 	private int x;
@@ -27,34 +28,55 @@ public class laberinto {
 
 	public static void main (String [] args) {
 
-		int [][] b = pedirEntrada();
+		char [][] b = pedirEntrada();
 		print(b);
 		ArrayList <point> vecinos = buscarVecinas(b,0,0,-1,-1);
-		avanzar();
+		//avanzar();
 	}
 
-	public static int [][] pedirEntrada () {
+	public static char [][] pedirEntrada () {
 
-		int n = 5;
-		int [][] matriz = new int [n][];
-
-		for (int i = 0; i<n; i++) {
-			matriz [i] = new int [n];
-
+		Scanner scan = new Scanner (System.in);
+		
+		ArrayList <String> entrada = new ArrayList <String>();
+		int n = scan.nextInt();
+		
+		for(int i=0; i<n; i++) {
+			String cadena=scan.next();
+			entrada.add(i,cadena);
 		}
-		Random randomGenerator = new Random();
+		
+		System.out.println(entrada);
 
-		for (int i = 0; i<n; i++) {
-			
-			for (int j = 0; j<n; j++) {
-				matriz [i][j] = randomGenerator.nextInt(2);;
+		char [][] matriz = new char [n][n];
 
+		matriz=inicializar(entrada,n);
+		
+		print(matriz);
+
+		return matriz;
+
+	}
+
+	public static char [][] inicializar(ArrayList <String> a ,int n) {
+
+		char [][] matriz = new char [n][n];
+
+		for (int i=0;i<n; i++) {
+
+			String linea = a.get(i);
+
+			System.out.println(linea.length());
+			for (int j=0; j<linea.length(); j++) {
+				
+				
+				matriz[i][j]=linea.charAt(j);
 			}
 		}
 		return matriz;
 	}
 
-	public static void print (int [][] a) {
+	public static void print (char [][] a) {
 		for (int i = 0; i<a.length; i++) {
 			
 			for (int j = 0; j<a.length; j++) {
@@ -65,7 +87,7 @@ public class laberinto {
 		}
 	}
 
-	public static ArrayList <point> buscarVecinas(int [][] a, int x, int y, int xA,int yA) {
+	public static ArrayList <point> buscarVecinas(char [][] a, int x, int y, int xA,int yA) {
 
 		ArrayList <point> vecinos = new ArrayList <point>();
 
@@ -100,11 +122,12 @@ public class laberinto {
 
 	}
 
-	public static boolean avanzar(int [][] a,int x,int y,ArrayList <point> vecinos) {
+	public static boolean avanzar(char [][] a,int x,int y,ArrayList <point> vecinos) {
 
 		for(point p : vecinos) {
-			avanzar(a,p.getX(),p.getY());
+			//avanzar(a,p.getX(),p.getY());
 		}
+		return false;
 	}
 
 }
