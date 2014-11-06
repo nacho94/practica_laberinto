@@ -86,8 +86,11 @@ public class laberinto {
 
 			for (int j=0; j<linea.length(); j++) {
 				
-				
+				if(linea.charAt(j) == '*') {
+					matriz[i][j]=linea.charAt(j);
+				}else {
 				matriz[i][j]=(char)Integer.parseInt(linea.charAt(j) + "");
+				}
 			}
 		}
 		return matriz;
@@ -113,25 +116,25 @@ public class laberinto {
 		if (y-1 != yA && y-1 >= 0 && (a[x][y-1] == 0 || a[x][y-1] == '*')) {
 			anyadirpunto(vecinos, x,y-1,a);
 		}
-		if (x+1 != xA && y-1 != yA && x+1 <length && y-1 >=0 && a[x+1][y-1] == 0) {
+		if (x+1 != xA && y-1 != yA && x+1 <length && y-1 >=0 && (a[x+1][y-1] == 0 || a[x+1][y-1] == '*')) {
 			anyadirpunto(vecinos, x+1,y-1,a);
 		}
-		if (x+1 != xA && x+1 <length && a[x+1][y] == 0) {
+		if (x+1 != xA && x+1 <length && (a[x+1][y] == 0 || a[x+1][y] == '*')) {
 			anyadirpunto(vecinos, x+1,y,a);
 		}
-		if (x+1 != xA && y+1 != yA && x+1 <length && y+1 <length && a[x+1][y+1] == 0) {
+		if (x+1 != xA && y+1 != yA && x+1 <length && y+1 <length && (a[x+1][y+1] == 0 || a[x+1][y+1] == '*')) {
 			anyadirpunto(vecinos, x+1,y+1,a);
 		}
-		if (y+1 != yA && y+1 <length && a[x][y+1] == 0) {
+		if (y+1 != yA && y+1 <length && (a[x][y+1] == 0 || a[x][y+1] == '*')) {
 			anyadirpunto(vecinos, x,y+1,a);
 		}
-		if (x-1 != xA && y+1 != yA && x-1 >=0 && y+1 <length && a[x-1][y+1] == 0) {
+		if (x-1 != xA && y+1 != yA && x-1 >=0 && y+1 <length && (a[x-1][y+1] == 0 || a[x-1][y+1] == '*')) {
 			anyadirpunto(vecinos, x-1,y+1,a);
 		}
-		if (x-1 != xA && x-1 >=0 && a[x-1][y] == 0) {
+		if (x-1 != xA && x-1 >=0 && (a[x-1][y] == 0 || a[x-1][y] == '*')) {
 			anyadirpunto(vecinos, x-1,y,a);
 		}
-		if (x-1 != xA && y-1 != yA && x-1 >=0 && y-1 >= 0 && a[x-1][y-1] == 0) {
+		if (x-1 != xA && y-1 != yA && x-1 >=0 && y-1 >= 0 && (a[x-1][y-1] == 0 || a[x-1][y-1] == '*')) {
 			anyadirpunto(vecinos, x-1,y-1,a);
 		}
 		imprimirpuntos(vecinos);
