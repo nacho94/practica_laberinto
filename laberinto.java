@@ -110,7 +110,7 @@ public class laberinto {
 		if (x+1 != xA && x+1 <length && a[x+1][y] == 0) {
 			vecinos.add(new point(x+1,y));
 		}
-		if (x+1 != xA && y+1 != yA && x+1 <length && y+1 <length && a[x+1][y+1] == (char)0) {
+		if (x+1 != xA && y+1 != yA && x+1 <length && y+1 <length && a[x+1][y+1] == 0) {
 			vecinos.add(new point(x+1,y+1));
 		}
 		if (y+1 != yA && y+1 <length && a[x][y+1] == 0) {
@@ -132,7 +132,7 @@ public class laberinto {
 
 	public static boolean avanzar(char [][] a,int x,int y,ArrayList <point> vecinos) {
 
-		d("x= " + Integer.toString(x) + "  y= " + Integer.toString(y));
+		d("avanzar: x=" + Integer.toString(x) + "  y=" + Integer.toString(y));
 
 		int n = a.length;
 
